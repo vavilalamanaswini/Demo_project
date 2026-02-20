@@ -18,7 +18,7 @@ export default defineConfig({
 
     baseURL: "https://www.cardekho.com/",
 
-    headless: false,
+    headless: true,
 
     trace: 'on-first-retry',
   },
