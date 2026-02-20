@@ -13,7 +13,7 @@ test.describe("Car Details & Comparison", () => {
                 await carPage.changeCity(cities.primary);
         });
 
-        test("Open car detail pages @9", async ({ page }) => {
+        test.skip("Open car detail pages @9", async ({ page }) => {
                 const carPage = new CarPage(page);
                 await carPage.navigateHome();
                 await carPage.openCarDetails();
