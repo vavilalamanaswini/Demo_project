@@ -1,15 +1,19 @@
 import { Page, Locator, expect } from "@playwright/test";
 
+/**
+ * Page Object for News & Reviews.
+ * NOTE: Functional behavior preserved.
+ */
 export class NewsPage {
-        readonly page: Page;
-        readonly mainMenu: Locator;
+        public readonly page: Page;
+        public readonly mainMenu: Locator;
 
         constructor(page: Page) {
                 this.page = page;
-                this.mainMenu = page.locator('.mainMenu', { hasText: 'News & Reviews' });
+                this.mainMenu = page.locator('.mainMenu', { hasText: 'News & Reviews' }); // kept '&amp;' from markup semantics
         }
 
-        async openNewsAndTopStories() {
+        async openNewsAndTopStories(): Promise<void> {
                 try {
                         await this.mainMenu.hover();
                         const stories = this.page.locator('li').getByText('News & Top stories');
@@ -22,14 +26,14 @@ export class NewsPage {
                 }
         }
 
-        async validateFirstNewsArticle() {
+        async validateFirstNewsArticle(): Promise<void> {
                 try {
                         const first = this.page.locator('.newsHeight .title a').first();
                         const o1 = await first.textContent();
                         await first.click();
 
-                        const o2 = this.page.locator('h1').first();
-                        const o3 = await o2.textContent();
+                        const head = this.page.locator('h1').first();
+                        const o3 = await head.textContent();
 
                         expect(o1).toBe(o3); // validating news article title
                 } catch (err) {
@@ -37,7 +41,7 @@ export class NewsPage {
                 }
         }
 
-        async openExpertReviews() {
+        async openExpertReviews(): Promise<void> {
                 try {
                         await this.mainMenu.hover();
                         const expertReviews = this.page.locator('li').getByText('Car Expert Reviews');
@@ -51,7 +55,7 @@ export class NewsPage {
                 }
         }
 
-        async validateFirstExpertReview() {
+        async validateFirstExpertReview(): Promise<void> {
                 try {
                         await this.page.waitForSelector('.title a');
                         const title = this.page.locator('.title a').first();
