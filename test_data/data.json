@@ -1,0 +1,20 @@
+{
+    "cities": {
+        "primary": "Chennai",
+        "alternate": "Pune"
+    },
+    "login": {
+        "invalidPhone": "1234567890",
+        "validPhone": "8074525491",
+        "wrongOtp": "1234"
+    },
+    "language": {
+        "name": "Telugu",
+        "displayText": "తెలుగు"
+    },
+    "search": {
+        "positiveQuery": "Suv under 10 Lakh",
+        "positiveExpected": "SUV Cars Under 10 Lakh",
+        "negativeQuery": "Manaswini"
+    }
+}
