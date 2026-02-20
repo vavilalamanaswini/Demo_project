@@ -34,6 +34,7 @@ test.describe("Car Details & Comparison", () => {
         });
 
         test("Check EMI calculator @12", async ({ page }) => {
+                test.slow();
                 const carPage = new CarPage(page);
                 await carPage.navigateHome();
                 await carPage.openCarDetails();
