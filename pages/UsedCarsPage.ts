@@ -1,14 +1,21 @@
+import { Page, expect, Locator } from "@playwright/test";
 
-import { Page, expect } from "@playwright/test";
-
+/**
+ * Page Object for Used Cars flows.
+ * NOTE: Class name kept as CarPage to preserve your imports.
+ */
 export class CarPage {
-        readonly page: Page;
+        public readonly page: Page;
+
+        // Stable/menu locators (scoped here as needed)
+        private readonly usedCarsMenu: Locator;
 
         constructor(page: Page) {
                 this.page = page;
+                this.usedCarsMenu = this.page.getByText("Used cars", { exact: true });
         }
 
-        async navigateToHome() {
+        async navigateToHome(): Promise<void> {
                 try {
                         await this.page.goto("/");
                         await this.page.waitForSelector("li.mainMenu");
@@ -18,12 +25,12 @@ export class CarPage {
                 }
         }
 
-        async searchUsedCarsByCity(city: string) {
+        async searchUsedCarsByCity(city: string): Promise<void> {
                 try {
-                        await this.page.getByText("Used cars", { exact: true }).hover();
+                        await this.usedCarsMenu.hover();
                         await this.page.getByText("Used Cars In Your City", { exact: true }).hover();
                         await this.page.locator('a[title="Used Cars In Chennai"]').click();
-                        //await this.page.getByText(`Continue with ${city}`).click();
+                        // await this.page.getByText(`Continue with ${city}`).click();
                         await expect(this.page.locator("h1")).toContainText(`Used Cars in ${city}`);
                 } catch (error) {
                         console.error(`Error searching used cars in ${city}:`, error);
@@ -31,9 +38,9 @@ export class CarPage {
                 }
         }
 
-        async checkDealerContactDetails(city: string) {
+        async checkDealerContactDetails(city: string): Promise<void> {
                 try {
-                        await this.page.getByText("Used cars", { exact: true }).hover();
+                        await this.usedCarsMenu.hover();
                         await this.page.locator("li").getByText("Dealership Near Me").click();
 
                         await this.page.getByAltText(city).first().click();

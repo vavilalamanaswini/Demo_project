@@ -12,7 +12,7 @@ export default defineConfig({
 
   reporter: 'html',
 
-  workers: 1,
+  workers: 3,
 
   use: {
 
